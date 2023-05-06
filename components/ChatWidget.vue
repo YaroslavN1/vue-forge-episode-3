@@ -1,3 +1,13 @@
+<template>
+  <ChatBox
+    :me="me"
+    :users="users"
+    :messages="messages"
+    @new-message="handleNewMessage"
+    :usersTyping="usersTyping"
+  />
+</template>
+
 <script setup lang="ts">
 import { nanoid } from "nanoid";
 import { Message, User } from "~~/types";
@@ -61,12 +71,3 @@ async function handleNewMessage(message: Message) {
   }, 3000);
 }
 </script>
-<template>
-  <ChatBox
-    :me="me"
-    :users="users"
-    :messages="messages"
-    @new-message="handleNewMessage"
-    :usersTyping="usersTyping"
-  />
-</template>
