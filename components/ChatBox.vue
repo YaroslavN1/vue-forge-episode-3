@@ -1,16 +1,16 @@
 <template>
-  <div class="chat-wrapper max-w-lg absolute rounded-lg bg-gray-800 overflow-hidden">
+  <div ref="messageBox" class="chat-wrapper overflow-scroll max-w-lg absolute rounded-lg bg-gray-800">
     <button class="bg-gray-900 p-2" v-if="!showChat" @click="showChat = true" >
       Open chat
     </button>
-    <div v-else class="chat-opened overflow-visible">
-      <div @click="showChat = false" class="collapse collapse-arrow bg-gray-900">
+    <div v-else class="chat-opened">
+      <div @click="showChat = false" class="sticky top-0 z-10 collapse collapse-arrow bg-gray-900">
         <div class="collapse-title">
           Customer Support Chat
         </div>
       </div>
 
-      <div class="chat-content p-4">
+      <div class="chat-content z-0 px-4">
         <div
           v-for="message in messages"
           :key="message.id"
@@ -33,7 +33,12 @@
             {{ message.text}}
           </div>
         </div>
-        <div class="form-control w-full mt-4">
+      </div>
+
+      <div class="form-control sticky bottom-0 bg-gray-800 w-full px-4 pb-4 pt-2">
+          <label class="label" :class="usersTyping?.length ? '' : 'hide'">
+            <span class="label-text-alt">Botman is typing...</span>
+          </label>
           <input
             @keydown.enter.prevent="emitMessage()"
             v-model="messageText"
@@ -41,12 +46,8 @@
             placeholder="Type here"
             class="input input-bordered w-full bg-base-700"
           />
-          <label class="label" :class="usersTyping?.length ? '' : 'hide'">
-            <span class="label-text-alt">Botman is typing...</span>
-          </label>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -93,9 +94,9 @@
   
   function userAvatar(name: string): string {
     if (name === 'user') {
-      return '../public/avatar.jpg'
+      return '/avatar.jpg'
     } else {
-      return '../public/bot.jpg'
+      return '/bot.jpg'
     }
   }
 
@@ -104,18 +105,31 @@
   function formatDate(date: Date) {
     return timeAgo.format(date)
   }
+  const messageBox = ref<HTMLElement>()
+  watch(
+    () => props.messages.length,
+    async () => {
+      await nextTick()
+      if(messageBox.value) {
+      messageBox.value.scrollTop = messageBox.value.scrollHeight
+    }
+  })
   </script>
 
 <style scoped>
 
 .chat-wrapper {
-  max-height: 800px;
+  max-height: 650px;
   bottom: 40px;
   right: 40px;
 }
 
 .hide {
   visibility: hidden;
+}
+
+.scroll {
+  overflow: scroll;
 }
 
 </style>
