@@ -10,13 +10,15 @@
         </div>
       </div>
 
-      <chat-bubble
+      <ChatBubble
         v-for="message in messages"
         :key="message.id"
-        class="chat chat-content z-0 px-4"
-        :class="message.userId === 'user' ? 'chat-end' : 'chat-start'"
         :message="message"
       />
+
+      <ChatBubble v-for="user in usersTyping" :key="user.id" :user="user">
+        <AppLoading/>
+      </ChatBubble>
 
       <div class="form-control sticky bottom-0 bg-gray-800 w-full p-4 pt-8">
           <input
@@ -37,6 +39,7 @@
   import { Message, User } from "../types"
   import { nanoid } from "nanoid"
   import ChatBubble from './ChatBubble.vue'
+  import AppLoading from './AppLoading.vue'
 
 
   const props = defineProps<{
