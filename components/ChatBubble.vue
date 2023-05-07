@@ -7,7 +7,7 @@
     </div>
     <div class="chat-header mb-1">
       <p class="inline mr-2" >{{ userName(message.userId) }}</p>
-      <time class="text-xs opacity-50">{{ formatDate(message.createdAt) }}</time>
+      <time class="text-xs opacity-50">{{ timeAgo(message.createdAt) }}</time>
     </div>
     <div
       class="chat-bubble"
@@ -19,10 +19,12 @@
 </template>
 
 <script setup lang="ts">
+  import type { Ref } from 'vue'
   import Markdown from 'vue3-markdown-it'
   import { Message } from "../types"
-  import TimeAgo from 'javascript-time-ago'
-  import de from 'javascript-time-ago/locale/en'
+  import { useTimeAgo } from '@vueuse/core'
+
+
 
   const props = defineProps<{
     message: Message
@@ -44,10 +46,8 @@
     }
   }
 
-  TimeAgo.addDefaultLocale(de)
-  const timeAgo = new TimeAgo('de-DE')
-  function formatDate(date: Date) {
-    return timeAgo.format(date)
+  function timeAgo (date: Date): Ref<string> {
+    return useTimeAgo(date)
   }
 
 </script>
