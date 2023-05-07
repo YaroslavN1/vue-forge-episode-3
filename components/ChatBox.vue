@@ -30,7 +30,7 @@
             class="chat-bubble"
             :class="message.userId === 'user' ? 'bg-gray-600' : 'bg-gray-900'"
           >
-            {{ message.text}}
+            <Markdown :source="message?.text" class="w-full" />
           </div>
         </div>
       </div>
@@ -53,11 +53,11 @@
 
 <script setup lang="ts">
 
-  import { ref } from 'vue'
+  import { ref, defineProps, defineEmits } from 'vue'
+  import Markdown from 'vue3-markdown-it'
   import type { Ref } from 'vue'
-  import { defineProps, defineEmits } from 'vue'
-  import { Message, User } from "../types";
-  import { nanoid } from "nanoid";
+  import { Message, User } from "../types"
+  import { nanoid } from "nanoid"
   import TimeAgo from 'javascript-time-ago'
   import de from 'javascript-time-ago/locale/en'
 
