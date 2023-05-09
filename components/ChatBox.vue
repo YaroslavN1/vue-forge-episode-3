@@ -55,13 +55,15 @@
 
   const messageText: Ref<string> = ref('')
   function emitMessage() {
-    const userMessage: Message = {
-      text: messageText.value,
-      id: nanoid(),
-      userId: "user",
-      createdAt: new Date()
-    };
-    emit('new-message', userMessage);
+    emit(
+      'new-message',
+      {
+        text: messageText.value,
+        id: nanoid(),
+        userId: "user",
+        createdAt: new Date()
+      }
+    );
     messageText.value = '';
   }
 
