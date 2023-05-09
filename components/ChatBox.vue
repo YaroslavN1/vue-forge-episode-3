@@ -13,6 +13,7 @@
       <ChatBubble
         v-for="message in messages"
         :key="message.id"
+        :user="getUser(message.userId)"
         :message="message"
       />
 
@@ -22,7 +23,7 @@
 
       <div class="form-control sticky bottom-0 bg-gray-800 w-full p-4 pt-8">
           <input
-            @keydown.enter.prevent="emitMessage()"
+            @keydown.enter.exact="emitMessage()"
             v-model="messageText"
             type="text"
             placeholder="Type here"
@@ -40,7 +41,6 @@
   import { nanoid } from "nanoid"
   import ChatBubble from './ChatBubble.vue'
   import AppLoading from './AppLoading.vue'
-
 
   const props = defineProps<{
     me: User,
@@ -74,7 +74,12 @@
       messageBox.value.scrollTop = messageBox.value.scrollHeight
     }
   })
-  </script>
+
+  function getUser(userId: string): User {
+    return props.users.find((user) => user.id === userId)
+  }
+
+</script>
 
 <style scoped>
 
