@@ -1,5 +1,5 @@
 <template>
-  <div ref="messageBox" class="chat-wrapper overflow-scroll max-w-lg absolute rounded-lg bg-gray-800">
+  <div ref="messageBox" class="chat-wrapper w-full overflow-scroll max-w-lg absolute rounded-lg bg-gray-800">
     <button class="bg-gray-900 p-2" v-if="!showChat" @click="showChat = true" >
       Open chat
     </button>
@@ -49,7 +49,7 @@
     usersTyping?: User[]
   }>()
 
-  const emit = defineEmits<{(e: 'new-message', value: Message): void}>()
+  const emit = defineEmits<{(e: 'new-message', payload: Message): void}>()
 
   const showChat: Ref<boolean> = ref(true)
 
@@ -58,10 +58,10 @@
     emit(
       'new-message',
       {
-        text: messageText.value,
         id: nanoid(),
         userId: "user",
-        createdAt: new Date()
+        createdAt: new Date(),
+        text: messageText.value
       }
     );
     messageText.value = '';
