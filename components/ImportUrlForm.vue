@@ -9,7 +9,7 @@
           class="input input-bordered w-full"
         />
         <button class="btn">
-          <p>GENERATE ANNOUNCMENETS</p>
+          <p>GENERATE ANNOUNCEMENTS</p>
         </button>
       </div>
     </div>
