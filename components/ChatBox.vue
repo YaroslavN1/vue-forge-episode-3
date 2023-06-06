@@ -1,20 +1,20 @@
 <template>
-	<div ref="messageBox" class="chat-wrapper w-full overflow-scroll max-w-lg absolute rounded-lg bg-gray-800">
+	<div ref="messageBox" class="chat-wrapper overflow-scroll max-w-lg absolute rounded-lg bg-gray-800">
 		<button class="bg-gray-900 p-2" v-if="!showChat" @click="showChat = true" >
 			Open chat
 		</button>
-		<div v-else class="chat-opened">
+		<div v-else class="chat-opened w-full">
 			<div @click="showChat = false" class="sticky top-0 z-10 collapse collapse-arrow bg-gray-900">
 				<div class="collapse-title">
 					Customer Support Chat
 				</div>
 			</div>
 			
-			<div v-if="!messages.length" class="text-center w-[350px] m-auto">
+			<div v-if="!messages.length" class="text-center w-[450px] m-auto pt-4">
 				<strong class="text-lg">Chat with Botman!</strong>
 				<p>Our A.I. powered assistant</p>
 				<strong class="block mt-10">Go ahead and ask us something:</strong>
-				<ul class="list-inside list-disc text-left">
+				<ul class="list-inside list-disc text-left px-6">
 					<li>What is social media post generator?</li>
 					<li>How can I get human support?</li>
 					<li>How was this tool built?</li>
@@ -95,7 +95,6 @@
 </script>
 
 <style scoped>
-
 .chat-wrapper {
 	max-height: 650px;
 	bottom: 40px;
@@ -105,5 +104,4 @@
 .hide {
 	visibility: hidden;
 }
-
 </style>
