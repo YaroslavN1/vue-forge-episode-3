@@ -89,7 +89,7 @@
 	})
 
 	function getUser(userId: string): User {
-		return props.users.find((user) => user.id === userId)
+		return props.users.find((user) => user.id === userId)!
 	}
 
 </script>
