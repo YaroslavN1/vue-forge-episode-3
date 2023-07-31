@@ -3,35 +3,42 @@
     <div class="form-control pb-4">
       <div class="input-group">
         <input
-          v-model="URL"
+          v-model="form.url"
           type="text"
           placeholder="Article URL..."
           class="input input-bordered w-full"
         />
-        <button class="btn">
+        <button class="btn" @click="emit('submit-form', form)">
           <p>GENERATE ANNOUNCEMENTS</p>
         </button>
       </div>
     </div>
     <input
-      v-model="temperature"
+      v-model.number="form.temperature"
       type="range"
       min="0"
       max="1"
       step="0.1"
       class="range range-secondary"
     />
-    <p>Temperature: {{ temperature }} -</p>
+    <p>Temperature: {{ form.temperature }} -</p>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Payload } from '@/types/index'
 
-  import type { Payload } from '@/types/index'
-  const emit = defineEmits<{
-    (e: 'url_temp', payload: Payload): void
-  }>();
+const props = defineProps<{
+  url: string,
+  temperature: number,
+}>();
 
-  const URL = ref('');
-  const temperature = ref(0.4);
+const emit = defineEmits<{
+  (e: 'submit-form', payload: Payload): void
+}>();
+
+const form = ref({
+  url: props.url,
+  temperature: props.temperature,
+});
 </script>
