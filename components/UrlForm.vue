@@ -21,7 +21,7 @@
       step="0.1"
       class="range range-secondary"
     />
-    <p>Temperature: {{ form.temperature }} -</p>
+    <p>Temperature: {{ form.temperature }}</p>
   </div>
 </template>
 
