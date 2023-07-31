@@ -1,6 +1,6 @@
 <template>
 	<h1 class="text-4xl my-10">Social Media Post Generator</h1>
-	<UrlForm v-bind="form" @submit-form="handleSubmitForm"/>
+	<URLForm v-bind="form" @submit-form="handleSubmitForm"/>
 
 	<div>
 		<TwitterCard/>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import UrlForm from './UrlForm.vue';
+import URLForm from './URLForm.vue';
 import TwitterCard from './TwitterCard.vue';
 import { Payload } from '~~/types';
 
