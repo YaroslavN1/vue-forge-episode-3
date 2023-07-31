@@ -9,7 +9,7 @@
 					Customer Support Chat
 				</div>
 			</div>
-			
+
 			<div v-if="!messages.length" class="text-center w-[450px] m-auto pt-4">
 				<strong class="text-lg">Chat with Botman!</strong>
 				<p>Our A.I. powered assistant</p>
@@ -62,7 +62,7 @@
 
 	const emit = defineEmits<{(e: 'new-message', payload: Message): void}>()
 
-	const showChat: Ref<boolean> = ref(true)
+	const showChat: Ref<boolean> = ref(false)
 
 	const messageText: Ref<string> = ref('')
 	function emitMessage() {
