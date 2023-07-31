@@ -1,9 +1,9 @@
 <template>
 	<h1 class="text-4xl my-10">Social Media Post Generator</h1>
-	<URLForm v-bind="form" @submit-form="handleSubmitForm"/>
+	<URLForm v-bind="form" @submit-form="handleFormSubmit"/>
 
 	<div>
-		<TwitterCard/>
+		<CardTwitter v-bind="form"/>
 		<!-- Facebook Card Here -->
 		<!-- Images Card Here -->
 	</div>
@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import URLForm from './URLForm.vue';
-import TwitterCard from './TwitterCard.vue';
+import CardTwitter from './CardTwitter.vue';
 import { Payload } from '~~/types';
 
 const form = ref({
@@ -19,7 +19,9 @@ const form = ref({
 	temperature: 0.4,
 });
 
-function handleSubmitForm(e: Payload) {
-	console.log(e);
+function handleFormSubmit(e: Payload) {
+	if(!!e.url) {
+		form.value = e;
+	}
 }
 </script>
